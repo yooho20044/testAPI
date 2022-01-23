@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="likeMapper">
+
+<select id="count" resultType="int">
+		select count(*) 
+			from tbl_like
+				where post_no = #{post_no}
+	</select>
+
+<insert id="plus" parameterType="likeDTO">
+	insert into tbl_like values(#{user_id},#{post_no},sysdate)
+</insert>
+
+<delete id="minus">
+	delete from tbl_like where user_id=#{user_id} and post_no = #{post_no}
+</delete>
+
+<select id="selectLike" parameterType="map" resultType="int">
+	select count(*) from tbl_like where user_id=#{user_id} and post_no = #{post_no}
+</select>
+</mapper>

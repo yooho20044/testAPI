@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cartMapper">
+
+<insert id="insertCart" parameterType="cartDTO">
+insert into tbl_cart values(#{user_id}, #{product_no}, #{quantity})
+</insert>
+
+<select id="selectCart" resultType="map">
+select a.name, a.price, b.quantity
+from tbl_product a, tbl_cart b
+where a.product_no=b.product_no
+and b.user_id=#{user_id}
+</select>
+
+<delete id="deleteCart">
+delete tbl_cart where product_no =
+(select product_no from tbl_product where name=#{name})
+</delete>
+
+</mapper>
