@@ -21,8 +21,12 @@ public class CartController {
 	@RequestMapping(value="/insertCart.do")
 	@ResponseBody
 	public int insertCart(CartDTO dto) throws Exception {
-		return service.insertCart(dto);	
-	
+		int check = service.selectById(dto.getUser_id(), dto.getProduct_no());
+		if(check==1) {
+			return -1;
+		}else {
+			return service.insertCart(dto);	
+		}
 	}
 	
 	@RequestMapping(value="/selectCart.do")
@@ -37,5 +41,17 @@ public class CartController {
 	public String deleteCart(String name) throws Exception{
 		service.deleteCart(name);
 		return "redirect:/cart/selectCart.do?user_id=ddd111";
+	}
+	
+	@RequestMapping(value="/updateQuantity.do")
+	@ResponseBody
+	public String updateQuantity(String name, int quantity) throws Exception{
+		
+		if(service.updateQuantity(name, quantity)==1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
 	}
 }

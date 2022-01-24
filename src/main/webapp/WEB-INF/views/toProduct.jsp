@@ -11,10 +11,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<label>키가쑥쑥 화분</label>
+				<label>자바의 정석</label>
 			</div>
 			<div class="col">
-				식물을 이 화분에 심으면 키가 쑥쑥 자라요!
+				현실에서는 찐따였던 내가 이세계에선 자바 마스터?
 			</div>
 			<div class="col">
 				<label>수량</label>
@@ -37,10 +37,10 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<label>트럼프카드</label>
+				<label>키가쑥쑥 화분</label>
 			</div>
 			<div class="col">
-				마술에 사용되는 트럼프카드!
+				식물을 심으면 키가 쑥쑥 자라요!
 			</div>
 			<div class="col">
 				<label>수량</label>
@@ -63,28 +63,28 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<label>물품3</label>
+				<label>파이썬 하루만에 끝내기</label>
 			</div>
 			<div class="col">
-				<input type="text" value="물품3정보">
+				파이썬 하루만에 뿌수자!
 			</div>
 			<div class="col">
 				<label>수량</label>
-				<select name="quantity">
+				<select id="quantity3">
 					<option value="">수량선택</option>
 					<option value=1>1</option>
-					<option value=1>2</option>
-					<option value=1>3</option>
-					<option value=1>4</option>
-					<option value=1>5</option>
-					<option value=1>6</option>
-					<option value=1>7</option>
-					<option value=1>8</option>
-					<option value=1>9</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+					<option value=6>6</option>
+					<option value=7>7</option>
+					<option value=8>8</option>
+					<option value=9>9</option>
 				</select>
 			</div>
 			<div class="col">
-				<button type="button" value="3">장바구니담기</button>
+				<button type="button" id="cart3" value="3">장바구니담기</button>
 			</div>
 		</div>
 	</div>
@@ -94,7 +94,8 @@
 //장바구니 버튼 클릭시
 	$("#cart1").click(function(){
 		let num = $(this).val();
-		let id = "ddd111"
+		console.log(num);
+		let id = "ddd111";
 		let quantity = $("#quantity1").val();
 		
 		
@@ -104,11 +105,14 @@
 			type: "get"
 		}).done(function(data){
 			if(data==1){
-				let con = confirm("장바구니로 이동하시겠습니까??");
+				let con = confirm("상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까??");
 				if(con == true){
 					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
-				}else{
-						
+				}
+			}else if(data==-1){
+				let con = confirm("장바구니에 중복된 상품이 있습니다. 장바구니로 이동하시겠습니까??");
+				if(con == true){
+					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
 				}
 			}	
 		}).fail(function(e){
@@ -119,6 +123,7 @@
 	//장바구니 버튼 클릭시
 	$("#cart2").click(function(){
 		let num = $(this).val();
+		console.log(num);
 		let id = "ddd111"
 		let quantity = $("#quantity2").val();
 		
@@ -129,11 +134,44 @@
 			type: "get"
 		}).done(function(data){
 			if(data==1){
-				let con = confirm("장바구니로 이동하시겠습니까??");
+				let con = confirm("상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까??");
 				if(con == true){
 					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
-				}else{
-						
+				}
+			}else if(data==-1){
+				let con = confirm("장바구니에 중복된 상품이 있습니다. 장바구니로 이동하시겠습니까??");
+				if(con == true){
+					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
+				}
+			}	
+			
+		}).fail(function(e){
+			console.log(e);
+		})
+	})
+	
+	//장바구니 버튼 클릭시
+	$("#cart3").click(function(){
+		let num = $(this).val();
+		console.log(num);
+		let id = "ddd111"
+		let quantity = $("#quantity3").val();
+		
+		
+		//데이터 입력한 뒤에 장바구니로 이동할 것인지 확인받음
+		$.ajax({
+			url:"${pageContext.request.contextPath}/cart/insertCart.do?product_no="+num+"&user_id="+id+"&quantity="+quantity,
+			type: "get"
+		}).done(function(data){
+			if(data==1){
+				let con = confirm("상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까??");
+				if(con == true){
+					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
+				}
+			}else if(data==-1){
+				let con = confirm("장바구니에 중복된 상품이 있습니다. 장바구니로 이동하시겠습니까??");
+				if(con == true){
+					location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id="+id;
 				}
 			}	
 		}).fail(function(e){
