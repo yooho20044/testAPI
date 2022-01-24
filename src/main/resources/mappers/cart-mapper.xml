@@ -10,7 +10,7 @@ insert into tbl_cart values(#{user_id}, #{product_no}, #{quantity})
 </insert>
 
 <select id="selectCart" resultType="map">
-select a.name, a.price, b.quantity
+select a.name, a.price, a.stock, b.quantity
 from tbl_product a, tbl_cart b
 where a.product_no=b.product_no
 and b.user_id=#{user_id}

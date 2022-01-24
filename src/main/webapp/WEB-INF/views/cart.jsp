@@ -25,6 +25,7 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td><input type="text" value="${dto.NAME}" disabled></td>
+					<td hidden><input type="text" id="stock" value="${dto.STOCK}"></td>
 					<td>${dto.PRICE}</td>
 					<td><input type="text" class="quantity" value="${dto.QUANTITY}"></td>
 					<td><button type="button" class="deleteCart" value="${dto.NAME }">장바구니삭제</button></td>
@@ -34,6 +35,7 @@
 						<c:out value="${total }"/>
 					</td>
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
@@ -65,18 +67,37 @@
 		let quantity = e.target.value;
 		let thisRow = $(this).closest('tr');
 		let name = thisRow.find('td:eq(0)').find('input').val();
+		let stock = thisRow.find('td:eq(1)').find('input').val();	
 		
-		
-		$.ajax({
-			url:"${pageContext.request.contextPath}/cart/updateQuantity.do?quantity="+quantity+"&name=" + name,
-			post:"get"
-		}).done(function(data){
-			if(data == "success"){
-				location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id=ddd111";	
+		function Regex(){
+			const Regex = /[0-9]/;
+			if(Regex.test(quantity)){
+				return true;
+			}else{
+				return false;
 			}
-		}).fail(function(e){
-			console.log(e);
-		})
+		}
+		
+		if(!Regex() || quantity==""){
+			alert("올바른 숫자를 입력해주세요.")
+		}else{
+		
+			if(quantity<=stock){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/cart/updateQuantity.do?quantity="+quantity+"&name=" + name,
+					post:"get"
+				}).done(function(data){
+					if(data == "success"){
+						location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id=ddd111";	
+					}
+				}).fail(function(e){
+					console.log(e);
+				})
+			}else{
+				alert("재고가 부족합니다. 수량을 조절해주세요.");
+			}
+		
+		}
 	})
 	
 	</script>

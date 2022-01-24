@@ -5,6 +5,8 @@
 
 <mapper namespace="productMapper">
 
-
+<select id="selectAll" resultType="map" parameterType="productDTO">
+select * from tbl_product order by 1 
+</select>
 
 </mapper>

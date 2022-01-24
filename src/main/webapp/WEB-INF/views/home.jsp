@@ -28,7 +28,7 @@
 			location.href="${pageContext.request.contextPath}/toAlarm.do";
 		})
 		$("#toProduct").click(function(){
-			location.href="${pageContext.request.contextPath}/toProduct.do";
+			location.href="${pageContext.request.contextPath}/product/selectAll.do";
 		})
 		$("#toCart").click(function(){
 			location.href="${pageContext.request.contextPath}/cart/selectCart.do?user_id=ddd111";
