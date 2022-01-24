@@ -25,4 +25,11 @@ public class CartService {
 	public int deleteCart(String name) throws Exception{
 		return dao.deleteCart(name);
 	}
+	
+	public int selectById(String user_id, int product_no) throws Exception{
+		return dao.selectById(user_id, product_no);
+	}
+	public int updateQuantity(String name, int quantity) throws Exception{
+		return dao.updateQuantity(name, quantity);
+	}
 }

@@ -21,4 +21,12 @@ delete tbl_cart where product_no =
 (select product_no from tbl_product where name=#{name})
 </delete>
 
+<select id="selectById" resultType="int">
+select count(*) from tbl_cart where user_id=#{user_id} and product_no=#{product_no}
+</select>
+
+<update id="updateQuantity">
+update tbl_cart set quantity=#{quantity} where product_no = 
+(select product_no from tbl_product where name=#{name})
+</update>
 </mapper>
