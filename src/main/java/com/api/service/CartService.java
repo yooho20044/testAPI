@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.dao.CartDAO;
 import com.api.dto.CartDTO;
+import com.api.dto.TempOrderDTO;
 
 @Service
 public class CartService {
@@ -18,7 +19,7 @@ public class CartService {
 		return dao.insertCart(dto);
 	}
 	
-	public List<Object> selectCart(String user_id) throws Exception{
+	public List<TempOrderDTO> selectCart(String user_id) throws Exception{
 		return dao.selectCart(user_id);
 	}
 	

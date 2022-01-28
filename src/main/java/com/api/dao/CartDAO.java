@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.api.dto.CartDTO;
+import com.api.dto.TempOrderDTO;
 
 @Repository
 public class CartDAO {
@@ -20,7 +21,7 @@ public class CartDAO {
 		return session.update("cartMapper.insertCart", dto);
 	}
 	
-	public List<Object> selectCart(String user_id) throws Exception{
+	public List<TempOrderDTO> selectCart(String user_id) throws Exception{
 		return session.selectList("cartMapper.selectCart", user_id);
 	}
 	
