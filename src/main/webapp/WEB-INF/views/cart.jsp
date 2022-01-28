@@ -35,7 +35,6 @@
 						<c:out value="${total }"/>
 					</td>
 				</tr>
-				
 			</c:forEach>
 		</tbody>
 	</table>
@@ -49,7 +48,7 @@
 		<c:out value="${ttotal }"/>
 	</div>
 	</div>
-	<button type="button">구매</button>
+	<button type="button" id="toOrder">구매</button>
 	<button type="button" id="back">취소</button>
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -98,6 +97,9 @@
 			}
 		
 		}
+	})
+	$("#toOrder").click(function(){
+		location.href="${pageContext.request.contextPath}/cart/toOrder.do?user_id=${loginSession.user_id}"
 	})
 	
 	</script>

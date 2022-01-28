@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.api.dto.CartDTO;
+import com.api.dto.TempOrderDTO;
 import com.api.service.CartService;
 
 @Controller
@@ -32,7 +33,7 @@ public class CartController {
 	@RequestMapping(value="/selectCart.do")
 	public String selectCart(String user_id, Model model) throws Exception{
 		
-		List<Object> list = service.selectCart(user_id);
+		List<TempOrderDTO> list = service.selectCart(user_id);
 		model.addAttribute("list", list);
 		return "cart";
 	}
@@ -52,6 +53,14 @@ public class CartController {
 		}else {
 			return "fail";
 		}
+		
+	}
+	
+	@RequestMapping(value="/toOrder.do")
+	public String toOrder(Model model, String user_id) throws Exception{
+		List<TempOrderDTO> list = service.selectCart(user_id);
+		model.addAttribute("cartList", list);
+		return "order";
 		
 	}
 }

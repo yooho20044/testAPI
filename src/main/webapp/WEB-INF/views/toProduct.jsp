@@ -39,10 +39,13 @@
 //장바구니 버튼 클릭시
 	$(".cart").click(function(e){
 		let num =e.target.value; //물품번호
+		console.log("물품번호 : " + num);
 		let id = "ddd111";
 		let thisRow = $(this).closest(".row");
 		let stock = thisRow.find('.stockBox').find('.stock').val(); //재고
 		let quantity = thisRow.find('.quantityBox').find('.quantity').val();//수량
+		console.log("재고 : " + stock);
+		console.log("수량 : " + quantity);
 		
 		
 		function Regex(){
@@ -60,7 +63,6 @@
 				
 				//재고파악
 				if(quantity<=stock){
-					
 					//데이터 입력한 뒤에 장바구니로 이동할 것인지 확인받음
 					$.ajax({
 						url:"${pageContext.request.contextPath}/cart/insertCart.do?product_no="+num+"&user_id="+id+"&quantity="+quantity,

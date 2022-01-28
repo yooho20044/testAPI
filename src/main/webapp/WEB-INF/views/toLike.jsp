@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>좋아용</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+
 <style>
   .likebtnBox, .dislikebtnBox{
 float:left;
@@ -28,6 +29,7 @@ button:hover, #dislike{
 }
 
 </style>
+</head>
 <body>
 	 <div class="container">
         <div class="row">
@@ -59,25 +61,22 @@ button:hover, #dislike{
 			<div id="msgStack"></div>
 		</div>		
 	</div>
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
     
-    //화면뜨자마자 좋아요 카운트해서 불러옴
-$(document).ready(function(){
-	count();
-	selectLike();
-	
-})
-    //좋아요, 싫어요 둘중 하나만 눌리게 함
-//$('.likebtnBox>button, .dislikebtnBox>button').click(function(){
-//    event.preventDefault();
-//    $('.active').removeClass('active');
-//    $(this).addClass('active');
-//});
-    
+
+	$(document).ready(function() {
+			count();
+			selectLike();
+		 
+		});   
 	//좋아요 +1
 $('#like').click(function(){
-	
+	let bid= 'ddd111'
+	let receiver='aaa111'
+	let count ='1'
+	let btitle = '자바의정석'
 	$(this).css("display", "none")
 	$("#dislike").css("display", "block");
 
@@ -97,7 +96,10 @@ $('#like').click(function(){
 
 	//좋아요 -1
 $('#dislike').click(function(){
-	
+	let bid= 'ddd111'
+		let receiver='aaa111'
+		let count ='0'
+		let btitle = '자바의정석'
 	$(this).css("display", "none")
 	$("#like").css("display", "block");
 	
