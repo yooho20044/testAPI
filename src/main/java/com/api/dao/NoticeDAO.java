@@ -15,4 +15,8 @@ public class NoticeDAO {
 	public int insert(NoticeDTO dto) throws Exception{
 		return session.insert("noticeMapper.insert",dto);
 	}
+	
+	public String countMessage(String to_id) throws Exception{
+		return session.selectOne("noticeMapper.countMessage",to_id);
+	}
 }

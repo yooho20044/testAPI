@@ -9,4 +9,7 @@
 insert into tbl_notice values(#{notice_no},#{type}, #{post_no}, #{content}, sysdate, #{from_id}, #{to_id});
 </insert>
 
+<select id="countMessage">
+select count(*) from tbl_notice where to_id = #{to_id} 
+</select>
 </mapper>

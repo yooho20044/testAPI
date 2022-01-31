@@ -26,6 +26,7 @@ public class MemberController {
 		if(service.isLoginOk(user_id, password)) {
 			MemberDTO dto = service.getMember(user_id); 
 			session.setAttribute("loginSession", dto);
+			session.setAttribute("loginID", dto.getUser_id());
 			System.out.println(dto);
 			return "list";
 		}else{

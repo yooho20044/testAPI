@@ -71,31 +71,28 @@ button:hover, #dislike{
 			selectLike();	 
 		});   
 	
-ws = new WebSocket("ws://172.30.1.4/alarm");	
+ws = new WebSocket("ws://localhost:8089/alarm");	
 	
 	//좋아요 +1
 $('#like').click(function(){
-	let bid= 'ddd111'
+	let bid= '${loginSession.user_id}'
 	let receiver='aaa111'
 	let count ='1'
 	let btitle = '자바의정석'
 	
 	//(실시간알림파트)------------------------------------------------------------------
-	let notice_no = 1
-	let type = 1
-	let post_no = 1
-	let content = "좋아요"
+	let msg = bid + "님이 " + receiver + "님의 게시글에 좋아요를 눌렀습니다."
 	
-	ws.send(bid, receiver, notice_no, type, post_no, content);
 	//------------------------------------------------------------------------------
 	$(this).css("display", "none")
 	$("#dislike").css("display", "block");
 
 	$.ajax({
-		url : "${pageContext.request.contextPath}/like/plus.do?post_no=1&user_id=ddd111",
+		url : "${pageContext.request.contextPath}/like/plus.do?post_no=1&user_id="+bid,
 		type : "get"
 	}).done(function(data){
 		if(data == "available"){
+			ws.send(msg);
 			Recount();
 		}else if(data == "unavailable"){
 			alert("좋아요 요청 실패");
