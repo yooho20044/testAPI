@@ -10,6 +10,7 @@
 		<typeAlias type="com.api.dto.MemberDTO" alias="memberDTO"/>	
 		<typeAlias type="com.api.dto.PostDTO" alias="postDTO"/>
 		<typeAlias type="com.api.dto.ProductDTO" alias="productDTO"/>	
-		<typeAlias type="com.api.dto.CartDTO" alias="cartDTO"/>			
+		<typeAlias type="com.api.dto.CartDTO" alias="cartDTO"/>		
+		<typeAlias type="com.api.dto.NoticeDTO" alias="noticeDTO"/>		
 	</typeAliases>
 </configuration>

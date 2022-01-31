@@ -68,15 +68,26 @@ button:hover, #dislike{
 
 	$(document).ready(function() {
 			count();
-			selectLike();
-		 
+			selectLike();	 
 		});   
+	
+ws = new WebSocket("ws://172.30.1.4/alarm");	
+	
 	//좋아요 +1
 $('#like').click(function(){
 	let bid= 'ddd111'
 	let receiver='aaa111'
 	let count ='1'
 	let btitle = '자바의정석'
+	
+	//(실시간알림파트)------------------------------------------------------------------
+	let notice_no = 1
+	let type = 1
+	let post_no = 1
+	let content = "좋아요"
+	
+	ws.send(bid, receiver, notice_no, type, post_no, content);
+	//------------------------------------------------------------------------------
 	$(this).css("display", "none")
 	$("#dislike").css("display", "block");
 

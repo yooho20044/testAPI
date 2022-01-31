@@ -22,17 +22,17 @@
 </style>
 </head>
 <body>
-<!-- name, phone, email, address, user_id, amount 넘어감 -->
+<!-- name, phone, email, address, user_id, cost 넘어감 -->
 <form action ="${pageContext.request.contextPath}/" id="paymentForm" method="post">
 <table class="table">
 <input type="text" name="user_id" value="${loginSession.user_id }" hidden>
 		<h1>주문/결제</h1>
 		<thead>
 			<tr>
-				<th width="90">상품명</th>
+				<th>상품명</th>
 				<th>가격</th>
 				<th>수량</th>
-				<th></th>
+				<th>총액</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -43,7 +43,6 @@
 					<td><input type="text" value="${dto.NAME}" disabled></td>
 					<td>${dto.PRICE}</td>
 					<td>${dto.QUANTITY}</td>
-					<td hidden><input type="text" name="amount" id="amount" value="${dto.QUANTITY }"></td>
 					<td>
 						<c:set var="total" value="${dto.PRICE * dto.QUANTITY }"/>
 						<c:set var="ttotal" value="${ttotal+total}"/>
@@ -54,6 +53,7 @@
 				<tr>
 					<td colspan="3"><b>총 가격</b></td>
 					<td colspan="1"><c:out value="${ttotal }"/></td>
+					<td hidden><input type="text" name="cost" id="cost" value="${ttotal }"></td>
 				</tr>
 				
 				<!-- 주문자 정보칸 -->
@@ -172,7 +172,7 @@ document.getElementById("phone2").value = phone.substring(3,7);
 document.getElementById("phone3").value = phone.substring(3,7);
 $("#phone3").value = phone.substring(7);
 
-
+//체크박스 눌렀을 경우 주문자정보 자동으로 불러옴
 $("#selectInfo").click(function(){
 	let nn = '${loginSession.user_nickname}'
 	let email = '${loginSession.email}'
@@ -207,10 +207,9 @@ function regexName(){//이름 regex
 	return regexName.test(name.value);
 }
 	
-function regexPhone() {
+function regexPhone() {//핸드폰 regex
 	let regexPhone2 = /[0-9]{4,4}/;
 	let regexPhone3 = /[0-9]{4,4}/;
-	// 휴대전화 번호 중간 영역, 마지막 영역 모두 정규식 통과했을 경우
 	if (regexPhone2.test(phone2.value) && regexPhone3.test(phone3.value)) {
 		return true;
 	} else {
@@ -218,12 +217,12 @@ function regexPhone() {
 	}
 }
 
-function regexEmail(){
+function regexEmail(){//이메일 regex
 	let regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	return regexEmail.test(email.value);
 }
 
-
+//결제버튼 눌렀을경우 유효성검사 + form태그 실행
 $("#toPayment").click(function(){
 
 	
